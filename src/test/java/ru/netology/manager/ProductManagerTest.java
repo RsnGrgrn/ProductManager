@@ -16,11 +16,11 @@ class ProductManagerTest {
     ProductRepository repository = Mockito.mock(ProductRepository.class);
     ProductManager manager = new ProductManager(repository);
 
-    Smartphone smartphone1 = new Smartphone(1, "IPhone 11", 45000, "Apple");
-    Smartphone smartphone2 = new Smartphone(2, "IPhone 12", 58000, "Apple");
-    Smartphone smartphone3 = new Smartphone(3, "IPhone 13", 75000, "Apple");
-    Smartphone smartphone4 = new Smartphone(4, "Samsung S20", 60000, "Samsung");
-    Smartphone smartphone5 = new Smartphone(5, "Samsung S21", 75000, "Samsung");
+    Smartphone iphone11 = new Smartphone(1, "IPhone 11", 45000, "Apple");
+    Smartphone iphone12 = new Smartphone(2, "IPhone 12", 58000, "Apple");
+    Smartphone iphone13 = new Smartphone(3, "IPhone 13", 75000, "Apple");
+    Smartphone samsungS20 = new Smartphone(4, "Samsung S20", 60000, "Samsung");
+    Smartphone samsungS21 = new Smartphone(5, "Samsung S21", 75000, "Samsung");
 
     Book book1 = new Book(1, "Спектр", 800, "Сергей Лукьяненко");
     Book book2 = new Book(2, "Ночной дозор", 850, "Сергей Лукьяненко");
@@ -30,10 +30,10 @@ class ProductManagerTest {
 
     @Test
     void shouldPhoneSearchName() {
-        Product[] returned = {smartphone4, smartphone5};
+        Product[] returned = {samsungS20, samsungS21};
         doReturn(returned).when(repository).findAll();
 
-        Product[] expected = {smartphone4, smartphone5};
+        Product[] expected = {samsungS20, samsungS21};
         Product[] actual = manager.searchBy("Samsung");
 
         assertArrayEquals(expected, actual);
@@ -42,10 +42,10 @@ class ProductManagerTest {
 
     @Test
     void shouldPhoneSearchCompany() {
-        Product[] returned = {smartphone1, smartphone2, smartphone3};
+        Product[] returned = {iphone11, iphone12, iphone13};
         doReturn(returned).when(repository).findAll();
 
-        Product[] expected = {smartphone1, smartphone2, smartphone3};
+        Product[] expected = {iphone11, iphone12, iphone13};
         Product[] actual = manager.searchBy("Apple");
 
         assertArrayEquals(expected, actual);
@@ -54,7 +54,7 @@ class ProductManagerTest {
 
     @Test
     void shouldPhoneFalseSearch() {
-        Product[] returned = {smartphone1, smartphone2, smartphone3};
+        Product[] returned = {iphone11, iphone12, iphone13};
         doReturn(returned).when(repository).findAll();
 
         Product[] expected = {};
